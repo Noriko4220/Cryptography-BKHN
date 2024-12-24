@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Messenger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    .box {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Secure Messenger</h1>
+    
+    <div class="box">
+      <h3>Generate Keys</h3>
+      <input id="username" placeholder="Username" />
+      <select id="role">
+        <option value="sender">Sender</option>
+        <option value="recipient">Recipient</option>
+      </select>
+      <button onclick="generateKey()">Generate Key</button>
+    </div>
+
+    <div class="box">
+      <h3>Send Message</h3>
+      <input id="sender" placeholder="Sender Username" />
+      <input id="recipient" placeholder="Recipient Username" />
+      <input id="plaintext" placeholder="Message" />
+      <button onclick="sendMessage()">Send Message</button>
+    </div>
+
+    <div class="box">
+      <h3>Encrypted Message</h3>
+      <pre id="output"></pre>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3001/api';
+
+    async function generateKey() {
+      const username = document.getElementById('username').value;
+      const role = document.getElementById('role').value;
+
+      const response = await fetch(`${API_URL}/generateKey`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, role }),
+      });
+
+      const data = await response.json();
+      alert(`Key generated for ${role} (${username}).`);
+      console.log(data);
+    }
+
+    async function sendMessage() {
+      const sender = document.getElementById('sender').value;
+      const recipient = document.getElementById('recipient').value;
+      const plaintext = document.getElementById('plaintext').value;
+
+      const response = await fetch(`${API_URL}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sender, recipient, plaintext }),
+      });
+
+      const data = await response.json();
+      document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+      console.log(data);
+    }
+  </script>
+</body>
+</html>

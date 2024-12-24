@@ -1,0 +1,49 @@
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.certificate-section {
+  margin: 20px;
+}
+
+.certificate-section input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+.chat-box {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.encrypted {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.input-form {
+  margin-top: 20px;
+}
+
+.input-form input, .input-form textarea {
+  padding: 10px;
+  margin: 5px;
+  width: 300px;
+}
+
+.input-form button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
